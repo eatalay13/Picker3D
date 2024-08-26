@@ -2,7 +2,6 @@
 using Assets.Scripts.Data.ValueObjects;
 using Assets.Scripts.Keys;
 using Assets.Scripts.Signals;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
