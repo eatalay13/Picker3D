@@ -1,31 +1,18 @@
+using Assets.Scripts.Extensions;
 using System;
-using UnityEngine;
 using UnityEngine.Events;
 
-public class CoreGameSignals : MonoBehaviour
+namespace Assets.Scripts.Signals
 {
-    #region Singleton
-
-    public static CoreGameSignals Instance;
-
-    private void Awake()
+    public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-            return;
-        }
-
-        Instance = this;
+        public UnityAction<short> OnLevelInitialize = delegate { };
+        public UnityAction OnClearActiveLevel = delegate { };
+        public Func<byte> OnGetLevelValue = delegate { return 0; };
+        public UnityAction OnNextLevel = delegate { };
+        public UnityAction OnReset = delegate { };
+        public UnityAction OnRestartLevel = delegate { };
+        public UnityAction OnLevelSuccesful = delegate { };
+        public UnityAction OnLevelFailed = delegate { };
     }
-
-    #endregion
-
-
-    public UnityAction<short> OnLevelInitialize = delegate { };
-    public UnityAction OnClearActiveLevel = delegate { };
-    public Func<byte> OnGetLevelValue = delegate { return 0; };
-    public UnityAction OnNextLevel = delegate { };
-    public UnityAction OnReset = delegate { };
-    public UnityAction OnRestartLevel = delegate { };
-} 
+}

@@ -1,5 +1,7 @@
 using Assets.Scripts.Commands.Level;
 using Assets.Scripts.Data.ValueObjects;
+using Assets.Scripts.Enums;
+using Assets.Scripts.Signals;
 using UnityEngine;
 
 
@@ -30,16 +32,16 @@ namespace Assets.Scripts.Managers
 
         private void Awake()
         {
-            GetLevelData();
             GetActiveLevel();
+            GetLevelData();
 
             Init();
         }
 
         private void Start()
         {
+            CoreUISignals.Instance.OnOpenPanel?.Invoke(UIPanelTypes.Start, 1);
             CoreGameSignals.Instance.OnLevelInitialize?.Invoke((byte)(_currentLevel % _totalLevelCount));
-            //UISignals
         }
 
         private void Init()
@@ -52,7 +54,11 @@ namespace Assets.Scripts.Managers
 
         private void GetLevelData()
         {
-            _levelData = Resources.Load<CD_Level>("Data/CD_Level").Levels[_currentLevel];
+            var leves = Resources.Load<CD_Level>("Data/CD_Level");
+
+            if (leves is null or { Levels: null }) return;
+
+            _levelData = leves.Levels[_currentLevel];
         }
 
         private void GetActiveLevel()
