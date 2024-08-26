@@ -6,12 +6,12 @@ namespace Assets.Scripts.Commands.Level
     {
         private readonly Transform _levelHolder;
 
-        public OnLevelLoaderCommand(Transform levelHolder)
+        internal OnLevelLoaderCommand(Transform levelHolder)
         {
             _levelHolder = levelHolder;
         }
 
-        public void Execute(short levelIndex)
+        internal void Execute(short levelIndex)
         {
             var level = Resources.Load<GameObject>($"Prefabs/LevelPrefabs/Level {levelIndex}");
 
